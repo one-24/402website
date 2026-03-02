@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../dist/sortable.min.css" />
+    <link rel="stylesheet" href="../../css/wedding.css" />
+    <script type="text/javascript" src="../../dist/sortable.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/index.html">
+          <img
+            src="../../assets/imgs/logo.png"
+            alt="402 摄影"
+            class="logopng"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="../index.html"
+                >首页</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./wedding.html">婚纱照</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">婚礼跟拍</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                写真
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">情侣</a></li>
+                <li><a class="dropdown-item" href="#">单人</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#">宝宝照</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">视频</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">关于我们</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="htmleaf-container">
+      <ul class="sortable__nav nav">
+        <li>
+          <a data-sjslink="all" class="nav__link text-secondary"> All </a>
+        </li>
+        <li>
+          <a data-sjslink="weddingInDoor" class="nav__link text-secondary"> 内景 </a>
+        </li>
+        <li>
+          <a data-sjslink="weddingOutDoor" class="nav__link text-secondary"> 外景 </a>
+        </li>
+      </ul>
+      <main class="sortable">
+        <div class="container">
+          <div class="wrapper">
+            <div id="sortable" class="sjs-default"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script>
+      const listArr = [
+        {
+          id: "weddingInDoor1",
+          text: "内景/深色",
+          type: "weddingInDoor",
+          count: 7,
+        },
+        {
+          id: "weddingInDoor2",
+          text: "内景/复古",
+          type: "weddingInDoor",
+          count: 12,
+        },
+        {
+          id: "weddingInDoor3",
+          text: "内景/油画风",
+          type: "weddingInDoor",
+          count: 10,
+        },
+        {
+          id: "weddingInDoor4",
+          text: "外景/中式",
+          type: "weddingOutDoor",
+          count: 11,
+        },
+        {
+          id: "weddingInDoor5",
+          text: "内景/清新自然",
+          type: "weddingInDoor",
+          count: 0,
+        },
+      ];
+      const render = (arr) => {
+        // 渲染
+        const parentNode = document.querySelector(".sjs-default");
+        parentNode.innerHTML = "";
+        let nodeStr = "";
+        listArr.forEach((item, index) => {
+          const src =
+            item.count === 0
+              ? `"../assets/imgs/wedding/waiting.png"`
+              : `"../assets/imgs/wedding/item-${index + 1}.jpg"`;
+          nodeStr += ` <div data-sjsel="${item.type}">
+                <a class="card" href="./show.html?id=${item.id}&type=${item.type}&count=${item.count}">
+                  <span> ${item.text}</span>
+                  <img
+                    class="card__picture"
+                    src=${src}
+                    alt=""
+                  />
+                </a>
+              </div>`;
+        });
+        parentNode.innerHTML = nodeStr;
+        document.querySelector("#sortable").sortablejs();
+      };
+      render(listArr);
+      // const lis = document.querySelectorAll('.sortable__nav li')
+      // lis.forEach(item => {
+      //   item.addEventListener('click', () => {
+      //     console.log(item.children[0].innerText)
+      //     const text = item.children[0].innerText
+      //     if(text === 'ALL'){
+      //       render(listArr)
+      //     }else{
+
+      //       const tmp = listArr.filter(item1 => item1.text.includes(text))
+      //       render(tmp)
+      //     }
+      //   })
+      // })
+    </script>
+      <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

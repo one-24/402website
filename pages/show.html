@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../dist/sortable.min.css" />
+    <link rel="stylesheet" href="../../css/wedding.css" />
+    <script type="text/javascript" src="../../dist/sortable.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/index.html">
+          <img
+            src="../../assets/imgs/logo.png"
+            alt="402 摄影"
+            class="logopng"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="../index.html"
+                >首页</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./wedding.html">婚纱照</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">婚礼跟拍</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                写真
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">情侣</a></li>
+                <li><a class="dropdown-item" href="#">单人</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#">宝宝照</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">视频</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">关于我们</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="htmleaf-container">
+      <main class="sortable">
+        <div class="container">
+          <div class="wrapper">
+            <div id="sortable" class="sjs-default"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script>
+        // 获取id 和 type 和照片数量
+        const infoArr = location.search.slice(1).split('&')
+        const id = infoArr[0].split('=')[1]
+        const type = infoArr[1].split('=')[1]
+        const count = infoArr[2].split('=')[1]
+
+      const listArr = [];
+      for(let i = 0 ; i < count ; i++){
+        listArr.push({
+          id: "weddingIndoor8",
+          text: "外景/光影",
+          type,
+        },)
+      }
+      console.log(listArr,'listArr')
+      // 渲染
+      const parentNode = document.querySelector(".sjs-default");
+      let nodeStr = "";
+      listArr.forEach((item, index) => {
+        nodeStr += ` <div data-sjsel="flatty">
+                <div class="card">
+                  <img
+                    class="card__picture"
+                    src="../assets/imgs/wedding/${item.type}/${id}-${index + 1}.jpg"
+                    alt=""
+                  />
+                </div>
+              </div>`;
+      });
+      parentNode.innerHTML = nodeStr;
+      document.querySelector("#sortable").sortablejs();
+    </script>
+          <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
